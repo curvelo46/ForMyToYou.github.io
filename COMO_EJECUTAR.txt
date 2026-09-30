@@ -1,0 +1,7 @@
+
+1. Abre una terminal dentro de la carpeta que contiene index.html.
+2. Ejecuta: python -m http.server 8000
+3. Abre http://localhost:8000 en el navegador.
+
+La canción está en assets/KEYGEN.ogg y se inicia al pulsar "Ir".
+No abras index.html directamente con file://.

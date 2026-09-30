@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Space Dodge</title>
+
+    <link rel="stylesheet" href="css/main.css">
+</head>
+
+<body>
+
+    <div class="juego-container">
+
+        <header class="titulo">
+            <div>
+                <h1>🚀 SPACE DODGE</h1>
+                <p>Destruye los meteoritos y sobrevive</p>
+            </div>
+
+            <div id="info">
+                <span class="label">PUNTUACIÓN</span>
+                <span id="puntuacion">0</span>
+            </div>
+        </header>
+
+
+        <main class="zona-juego">
+
+            <canvas
+                id="juego"
+                width="800"
+                height="600">
+            </canvas>
+
+            <section id="pergaminoOverlay"
+         class="pergamino-overlay"
+         aria-label="Pergamino desbloqueado"
+         hidden>
+
+    <iframe
+        src="../pergamino.html"
+        title="Pergamino desbloqueado"
+        loading="lazy">
+    </iframe>
+
+</section>
+
+            <div id="mensaje">
+
+                <div class="game-over">
+                    <div class="explosion">💥</div>
+
+                    <h2>GAME OVER</h2>
+
+                    <p>
+                        Tu puntuación:
+                        <strong id="puntuacionFinal">0</strong>
+                    </p>
+
+                    <button onclick="reiniciar()">
+                        🚀 VOLVER A JUGAR
+                    </button>
+                </div>
+
+            </div>
+
+        </main>
+
+
+        <footer class="controles">
+
+            <div>
+                <span class="tecla">W</span>
+                <span class="tecla">A</span>
+                <span class="tecla">S</span>
+                <span class="tecla">D</span>
+
+                <span class="texto">
+                    Mover nave
+                </span>
+            </div>
+
+            <div>
+                <span class="tecla tecla-disparo">Z</span>
+
+                <span class="texto">
+                    Disparar
+                </span>
+            </div>
+
+        </footer>
+
+    </div>
+
+
+    <script type="module" src="js/juego.js"></script>
+
+</body>
+</html>

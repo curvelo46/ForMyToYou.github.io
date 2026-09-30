@@ -1,0 +1,182 @@
+#brillo {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: radial-gradient(ellipse at 50% 105%, rgba(255, 126, 94, .72) 0%, rgba(244, 114, 112, .16) 26%, rgba(190, 86, 137, .05) 45%, transparent 68%);
+    animation: respirar 8s ease-in-out infinite;
+}
+
+@keyframes respirar {
+    0%,
+    100% {
+        transform: scale(1);
+        opacity: .65;
+    }
+
+    50% {
+        transform: scale(1.10);
+        opacity: 1;
+    }
+}
+
+#universo.golden-final {
+    background:
+        radial-gradient(ellipse at 50% 48%, rgba(171, 156, 232, .14), transparent 38%),
+        radial-gradient(ellipse at 30% 25%, rgba(233, 184, 214, .08), transparent 26%),
+        radial-gradient(ellipse at 70% 72%, rgba(203, 213, 255, .08), transparent 30%),
+        linear-gradient(180deg, #050a17 0%, #0e1830 40%, #171a33 70%, #090d1a 100%);
+}
+
+#universo.finale-negro {
+    background: #000;
+}
+
+#universo.finale-negro > :not(#mensajeCierre) {
+    animation: none;
+    opacity: 0;
+    transition: opacity 5s ease;
+}
+
+#mensajeCierre {
+    position: absolute;
+    inset: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    color: #fff;
+    font-size: clamp(28px, 6vw, 56px);
+    text-align: center;
+    text-shadow: 0 0 18px rgba(255, 255, 255, .35);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+#universo.finale-negro #mensajeCierre {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 1.5s ease 5s, visibility 0s;
+}
+
+#universo.golden-final #goldenHour {
+    opacity: 0;
+    transition: opacity 2.5s ease;
+}
+
+#frases,
+#fotos {
+    opacity: 1;
+}
+
+#goldenHour {
+    position: absolute;
+    inset: 0;
+    z-index: 4;
+    pointer-events: none;
+    opacity: 0;
+    overflow: hidden;
+    transition: opacity 6s ease;
+}
+
+.golden-sol {
+    position: absolute;
+    left: 50%;
+    bottom: 17vh;
+    width: min(48vw, 420px);
+    aspect-ratio: 1;
+    border-radius: 50%;
+    transform: translateX(-50%) scale(.4);
+    background: radial-gradient(circle, #fff8c8 0%, #ffd06e 38%, #ff9a70 70%, rgba(255, 126, 105, 0) 72%);
+    box-shadow: 0 0 61.2px rgba(255, 187, 91, .80);
+    transition: transform 7s cubic-bezier(.16, 1, .3, 1);
+}
+
+.golden-horizonte {
+    position: absolute;
+    inset: 58% 0 0;
+    background: linear-gradient(180deg, rgba(255, 199, 118, 0), rgba(112, 50, 65, .22) 44%, rgba(39, 23, 48, .70) 100%);
+}
+
+#universo.cierre-frases #fotos {
+    opacity: .45;
+    transition: opacity 6s ease;
+}
+
+#universo.golden-final #fotos {
+    opacity: 0;
+    transition: opacity 10s ease;
+}
+
+#mensajeFinal {
+    position: absolute;
+    inset: 0;
+    z-index: 9;
+    perspective: 900px;
+    perspective-origin: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+}
+
+.mensaje-final-contenido {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 24px;
+    text-align: center;
+    color: #fff8df;
+    font-size: clamp(26px, 4.2vw, 54px);
+    text-shadow: 0 2px 22px rgba(91, 39, 42, .58);
+    opacity: 0;
+    transform: translateZ(-1800px) scale(.12);
+    transform-origin: center;
+    backface-visibility: hidden;
+}
+
+#mensajeFinal strong {
+    font-weight: normal;
+    color: #ffd58d;
+}
+
+@keyframes fraseAtraviesaPantalla {
+    0% {
+        opacity: 0;
+        transform: translateZ(-1800px) scale(.12);
+    }
+
+    20% {
+        opacity: .72;
+        transform: translateZ(-550px) scale(.48);
+    }
+
+    42%,
+    58% {
+        opacity: 1;
+        transform: translateZ(0) scale(1);
+    }
+
+    78% {
+        opacity: .95;
+        transform: translateZ(300px) scale(1.45);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateZ(850px) scale(2.8);
+    }
+}
+
+#universo.mensaje-final-visible .mensaje-final-contenido {
+    animation: fraseAtraviesaPantalla 8s cubic-bezier(.2, .7, .3, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    #universo.mensaje-final-visible .mensaje-final-contenido {
+        animation: none;
+        opacity: 1;
+        transform: none;
+    }
+}

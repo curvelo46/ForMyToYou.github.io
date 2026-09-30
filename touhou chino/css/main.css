@@ -1,0 +1,544 @@
+
+/* ==========================================
+   CONFIGURACIÓN GENERAL
+========================================== */
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+
+    width: 100%;
+    min-height: 100%;
+
+    font-family:
+        "Courier New",
+        monospace;
+
+    background:
+        radial-gradient(
+            circle at center,
+            #101936 0%,
+            #050817 45%,
+            #010207 100%
+        );
+
+    color: white;
+}
+
+
+/* ==========================================
+   FONDO
+========================================== */
+
+body {
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    min-height: 100vh;
+
+    overflow: hidden;
+}
+
+
+/* ==========================================
+   CONTENEDOR DEL JUEGO
+========================================== */
+
+.juego-container {
+
+    width: 850px;
+
+    max-width: 95vw;
+
+    position: relative;
+}
+
+
+/* ==========================================
+   TÍTULO
+========================================== */
+
+.titulo {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 12px;
+
+    padding: 15px 20px;
+
+    background:
+        rgba(10, 18, 45, 0.9);
+
+    border: 1px solid #263b73;
+
+    border-radius: 12px;
+
+    box-shadow:
+        0 0 20px rgba(40, 100, 255, 0.15);
+}
+
+
+.titulo h1 {
+
+    margin: 0;
+
+    font-size: 25px;
+
+    letter-spacing: 3px;
+
+    color: #7ddcff;
+
+    text-shadow:
+        0 0 8px #00bfff,
+        0 0 20px rgba(0, 191, 255, 0.5);
+}
+
+
+.titulo p {
+
+    margin: 5px 0 0;
+
+    color: #6e7fa8;
+
+    font-size: 12px;
+
+    letter-spacing: 1px;
+}
+
+
+/* ==========================================
+   PUNTUACIÓN
+========================================== */
+
+#info {
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: flex-end;
+
+    gap: 4px;
+}
+
+
+#info .label {
+
+    font-size: 10px;
+
+    letter-spacing: 2px;
+
+    color: #7284ad;
+}
+
+
+#puntuacion {
+
+    font-size: 25px;
+
+    font-weight: bold;
+
+    color: #ffffff;
+
+    text-shadow:
+        0 0 8px #00ffff;
+}
+
+
+/* ==========================================
+   ZONA DEL JUEGO
+========================================== */
+
+.zona-juego {
+
+    position: relative;
+
+    width: 100%;
+
+    display: flex;
+
+    justify-content: center;
+}
+
+.pergamino-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 1001;
+    display: flex;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.82);
+    opacity: 1;
+}
+
+.pergamino-overlay[hidden] {
+    display: none;
+}
+
+.pergamino-overlay.portal-transicion {
+    background: #000;
+    opacity: 0;
+    transition: opacity 1.8s ease;
+}
+
+.pergamino-overlay.portal-transicion.portal-oscurece {
+    opacity: 1;
+}
+
+.pergamino-overlay iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+.pergamino-overlay.portal-transicion iframe {
+    opacity: 0;
+    transition: opacity 2.4s ease;
+}
+
+.pergamino-overlay.portal-transicion.portal-ilumina iframe {
+    opacity: 1;
+}
+
+.cerrar-pergamino {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    z-index: 1;
+}
+
+
+/* ==========================================
+   CANVAS
+========================================== */
+
+canvas {
+
+    display: block;
+
+    width: 800px;
+
+    height: 600px;
+
+    max-width: 100%;
+
+    background:
+
+        radial-gradient(
+            circle at 50% 40%,
+            #111b3b 0%,
+            #050917 45%,
+            #010207 100%
+        );
+
+    border: 2px solid #263f7d;
+
+    border-radius: 8px;
+
+    box-shadow:
+
+        0 0 10px rgba(0, 150, 255, 0.3),
+
+        0 0 30px rgba(0, 100, 255, 0.15),
+
+        inset 0 0 30px rgba(0, 0, 0, 0.8);
+}
+
+
+/* ==========================================
+   PANTALLA GAME OVER
+========================================== */
+
+#mensaje {
+
+    position: absolute;
+
+    inset: 0;
+
+    display: none;
+
+    justify-content: center;
+
+    align-items: center;
+
+    background:
+        rgba(0, 0, 15, 0.78);
+
+    backdrop-filter:
+        blur(3px);
+
+    border-radius: 8px;
+}
+
+
+/* ==========================================
+   PANEL GAME OVER
+========================================== */
+
+.game-over {
+
+    text-align: center;
+
+    padding: 35px 55px;
+
+    background:
+        rgba(8, 14, 35, 0.96);
+
+    border: 1px solid #31529c;
+
+    border-radius: 15px;
+
+    box-shadow:
+        0 0 25px rgba(0, 150, 255, 0.3);
+}
+
+
+.explosion {
+
+    font-size: 50px;
+
+    margin-bottom: 5px;
+
+    animation:
+        explosion 0.8s infinite alternate;
+}
+
+
+.game-over h2 {
+
+    margin: 5px 0 15px;
+
+    font-size: 36px;
+
+    letter-spacing: 5px;
+
+    color: #ff5364;
+
+    text-shadow:
+        0 0 10px #ff3048;
+}
+
+
+.game-over p {
+
+    color: #9ba9cc;
+
+    font-size: 15px;
+}
+
+
+.game-over strong {
+
+    color: white;
+
+    font-size: 20px;
+}
+
+
+/* ==========================================
+   BOTÓN
+========================================== */
+
+button {
+
+    margin-top: 15px;
+
+    padding: 13px 25px;
+
+    border: 1px solid #2c91c9;
+
+    border-radius: 7px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #1674a8,
+            #0b3d61
+        );
+
+    color: white;
+
+    font-family:
+        "Courier New",
+        monospace;
+
+    font-weight: bold;
+
+    letter-spacing: 1px;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.15s,
+        box-shadow 0.15s;
+}
+
+
+button:hover {
+
+    transform:
+        translateY(-2px);
+
+    box-shadow:
+        0 0 15px rgba(0, 200, 255, 0.5);
+}
+
+
+button:active {
+
+    transform:
+        translateY(0);
+}
+
+
+/* ==========================================
+   CONTROLES
+========================================== */
+
+.controles {
+
+    display: flex;
+
+    justify-content: center;
+
+    gap: 35px;
+
+    margin-top: 12px;
+
+    padding: 12px;
+
+    color: #7180a3;
+
+    font-size: 12px;
+}
+
+
+.controles > div {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 5px;
+}
+
+
+.tecla {
+
+    display: inline-flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    width: 25px;
+
+    height: 25px;
+
+    margin-right: 2px;
+
+    border: 1px solid #344a78;
+
+    border-radius: 5px;
+
+    background: #0b1228;
+
+    color: #b9c9ed;
+
+    font-weight: bold;
+
+    box-shadow:
+        0 2px 0 #1d2946;
+}
+
+
+.tecla-disparo {
+
+    color: #75efff;
+
+    border-color: #187b91;
+
+    text-shadow:
+        0 0 5px #00eaff;
+}
+
+
+.texto {
+
+    margin-left: 5px;
+}
+
+
+/* ==========================================
+   ANIMACIONES
+========================================== */
+
+@keyframes explosion {
+
+    from {
+
+        transform:
+            scale(0.9);
+
+        opacity: 0.7;
+    }
+
+    to {
+
+        transform:
+            scale(1.1);
+
+        opacity: 1;
+    }
+}
+
+
+/* ==========================================
+   PANTALLAS PEQUEÑAS
+========================================== */
+
+@media (max-width: 700px) {
+
+    .titulo {
+
+        padding: 10px 12px;
+    }
+
+    .titulo h1 {
+
+        font-size: 17px;
+    }
+
+    .titulo p {
+
+        display: none;
+    }
+
+    #puntuacion {
+
+        font-size: 20px;
+    }
+
+    .controles {
+
+        gap: 10px;
+
+        font-size: 10px;
+    }
+
+    .texto {
+
+        display: none;
+    }
+
+}

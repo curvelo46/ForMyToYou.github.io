@@ -1,0 +1,44 @@
+#estrellasFugaces {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 2;
+}
+
+.estrella-fugaz {
+    position: absolute;
+    width: 150px;
+    height: 2px;
+    border-radius: 999px;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,.12), rgba(255,255,255,.9));
+    box-shadow: 0 0 7px rgba(255,255,255,.35);
+    opacity: 0;
+    transform-origin: right center;
+    animation: cometaCruza var(--cometDuration, 4.8s) linear infinite;
+    animation-delay: var(--cometDelay);
+}
+
+@keyframes cometaCruza {
+    0% {
+        opacity: 0;
+        transform: translate3d(var(--startX), var(--startY), 0) rotate(135deg);
+    }
+
+    7% {
+        opacity: .9;
+    }
+
+    45% {
+        opacity: 1;
+    }
+
+    82% {
+        opacity: .85;
+    }
+
+    100% {
+        opacity: 0;
+        transform: translate3d(var(--endX), var(--endY), 0) rotate(135deg);
+    }
+}

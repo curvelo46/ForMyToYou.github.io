@@ -1,0 +1,62 @@
+.frase {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    white-space: nowrap;
+    user-select: none;
+    opacity: 0;
+    z-index: 5;
+    color: #fff5df;
+    text-shadow: 0 0 12px rgba(255, 199, 118, .45);
+    animation: colorFrasesGolden 22s ease-in-out infinite;
+}
+
+.frase.grande {
+    font-size: clamp(27px, 4vw, 48px);
+}
+
+.frase.mediana {
+    font-size: clamp(18px, 2.6vw, 31px);
+}
+
+.frase.pequena {
+    font-size: clamp(12px, 1.5vw, 17px);
+    opacity: .78;
+}
+
+@keyframes colorFrasesGolden {
+    0%,
+    100% {
+        color: #fff5df;
+        text-shadow: 0 0 10px rgba(255, 223, 163, .40);
+    }
+
+    35% {
+        color: #ffd19a;
+        text-shadow: 0 0 15px rgba(255, 176, 101, .62);
+    }
+
+    65% {
+        color: #ffb6a7;
+        text-shadow: 0 0 15px rgba(245, 123, 126, .58);
+    }
+}
+
+#universo.galaxia-final #frases {
+    opacity: .18;
+    transition: opacity 6s ease;
+}
+
+@media (max-width: 600px) {
+    .frase.grande {
+        font-size: clamp(24px, 8vw, 42px);
+    }
+
+    .frase.mediana {
+        font-size: clamp(17px, 5vw, 27px);
+    }
+
+    .frase.pequena {
+        font-size: 13px;
+    }
+}

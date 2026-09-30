@@ -1,0 +1,946 @@
+/* ============================================================
+PERGAMINO INTERACTIVO — CSS AVANZADO
+============================================================ */
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+min-height: 100vh;
+display: flex;
+align-items: center;
+justify-content: center;
+
+font-family: 'Georgia', 'Times New Roman', serif;
+
+background:
+    /* Luz muy tenue detrás del pergamino */
+    radial-gradient(
+    ellipse at 50% 48%,
+    rgba(100, 70, 35, 0.22) 0%,
+    rgba(45, 28, 14, 0.30) 35%,
+    transparent 60%
+    ),
+
+    /* Zona de oscuridad izquierda */
+    radial-gradient(
+    ellipse at 0% 50%,
+    rgba(0, 0, 0, 0.72) 0%,
+    transparent 48%
+    ),
+
+    /* Zona de oscuridad derecha */
+    radial-gradient(
+    ellipse at 100% 50%,
+    rgba(0, 0, 0, 0.72) 0%,
+    transparent 48%
+    ),
+
+    /* Oscuridad superior */
+    linear-gradient(
+    180deg,
+    #080503 0%,
+    #160d07 35%,
+    #21140a 70%,
+    #0a0603 100%
+    );
+
+overflow: hidden;
+}
+
+
+
+    /* ----------------------------------------------------------
+    VELAS LATERALES
+    ---------------------------------------------------------- */
+.candle {
+    position: fixed;
+    bottom: 60px;
+    width: 60px;
+    z-index: 15;
+    pointer-events: none;
+}
+
+.candle-left  { left: 8%; }
+.candle-right { right: 8%; transform: scaleX(-1); } /* espejo */
+
+/* --- Cuerpo de cera --- */
+.candle-body {
+    position: relative;
+    width: 46px;
+    height: 150px;
+    margin: 0 auto;
+    border-radius: 10px 10px 6px 6px;
+    background:
+    /* vetas y brillo de la cera */
+    linear-gradient(90deg,
+        rgba(255,255,255,0.0) 0%,
+        rgba(255,245,215,0.55) 18%,
+        rgba(230,210,160,0.15) 40%,
+        rgba(120,90,50,0.35) 90%),
+    linear-gradient(180deg, #f0e0b8 0%, #dcc794 100%);
+    box-shadow:
+    inset -6px 0 10px rgba(90, 60, 25, 0.35),
+    inset 4px 0 8px rgba(255, 250, 230, 0.5),
+    0 10px 20px rgba(0,0,0,0.6);
+}
+
+/* Llama que ilumina la parte superior de la cera */
+.candle-body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 40px;
+    border-radius: 10px 10px 0 0;
+    background: radial-gradient(ellipse at 50% 0%,
+                rgba(255, 190, 90, 0.55), transparent 75%);
+    animation: waxGlow 2.8s ease-in-out infinite;
+}
+
+/* --- Cera derretida (gotas) --- */
+.drip {
+    position: absolute;
+    top: -4px;
+    background: linear-gradient(180deg, #f5e8c8, #d8c48e);
+    border-radius: 0 0 8px 8px;
+    box-shadow: inset -2px 0 3px rgba(90,60,25,0.25);
+}
+
+.drip-1 { left: 4px;  width: 9px; height: 34px; }
+.drip-2 { left: 18px; width: 7px; height: 52px; }
+.drip-3 { left: 32px; width: 8px; height: 24px; }
+
+/* --- Mecha --- */
+.wick {
+    position: absolute;
+    top: -16px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 4px;
+    height: 16px;
+    background: linear-gradient(180deg, #1a120a, #3a2a15);
+    border-radius: 2px;
+}
+
+/* --- Llama --- */
+.flame {
+    position: absolute;
+    top: -56px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 26px;
+    height: 44px;
+    background: radial-gradient(ellipse at 50% 80%,
+                #fff8dc 0%, #ffd45e 35%,
+                #ff9820 65%, rgba(255, 90, 20, 0.0) 100%);
+    border-radius: 50% 50% 50% 50% / 65% 65% 35% 35%;
+    filter: blur(0.4px);
+    transform-origin: 50% 100%;
+    animation: flickerFlame 2.2s ease-in-out infinite;
+    box-shadow:
+    0 0 20px 8px rgba(255, 170, 60, 0.45),
+    0 0 60px 25px rgba(255, 140, 40, 0.20);
+}
+
+.flame-inner {
+    position: absolute;
+    bottom: 4px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 12px;
+    height: 22px;
+    background: radial-gradient(ellipse at 50% 80%,
+                #ffffff 0%, #ffe9a0 60%, transparent 100%);
+    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+    animation: flickerFlame 1.6s ease-in-out infinite reverse;
+}
+
+/* ============================================================
+ILUMINACIÓN REALISTA DE LAS VELAS
+============================================================ */
+
+/* Halo principal de cada llama */
+.candle-glow {
+position: absolute;
+top: -210px;
+left: 50%;
+transform: translateX(-50%);
+
+width: 620px;
+height: 620px;
+border-radius: 50%;
+
+background:
+    radial-gradient(
+    circle at 50% 45%,
+    rgba(255, 235, 160, 0.18) 0%,
+    rgba(255, 190, 80, 0.13) 18%,
+    rgba(255, 150, 40, 0.075) 38%,
+    rgba(255, 120, 30, 0.025) 58%,
+    transparent 74%
+    );
+
+filter: blur(8px);
+mix-blend-mode: screen;
+
+animation:
+    candleLight 2.1s ease-in-out infinite alternate,
+    candleDrift 4.7s ease-in-out infinite;
+}
+
+
+/* Luz irregular que afecta al pergamino */
+.scene::before,
+.scene::after {
+content: '';
+position: fixed;
+top: -20%;
+width: 65vw;
+height: 150vh;
+
+pointer-events: none;
+z-index: 8;
+
+filter: blur(12px);
+mix-blend-mode: screen;
+}
+
+
+/* Luz de la vela izquierda */
+.scene::before {
+left: -5%;
+
+background:
+    radial-gradient(
+    ellipse at 12% 58%,
+    rgba(255, 185, 75, 0.16) 0%,
+    rgba(255, 155, 45, 0.10) 20%,
+    rgba(255, 130, 30, 0.045) 42%,
+    transparent 70%
+    );
+
+animation:
+    candleSweepLeft 2.8s ease-in-out infinite alternate;
+}
+
+
+/* Luz de la vela derecha */
+.scene::after {
+right: -5%;
+
+background:
+    radial-gradient(
+    ellipse at 88% 58%,
+    rgba(255, 185, 75, 0.16) 0%,
+    rgba(255, 155, 45, 0.10) 20%,
+    rgba(255, 130, 30, 0.045) 42%,
+    transparent 70%
+    );
+
+animation:
+    candleSweepRight 3.1s ease-in-out infinite alternate;
+}
+
+
+/* ============================================================
+SOMBRA AMBIENTAL DE LAS VELAS
+============================================================ */
+
+.candle-shadow {
+position: absolute;
+bottom: -14px;
+left: 50%;
+
+width: 130px;
+height: 25px;
+
+transform: translateX(-50%);
+
+border-radius: 50%;
+
+background:
+    radial-gradient(
+    ellipse at center,
+    rgba(0, 0, 0, 0.65) 0%,
+    rgba(0, 0, 0, 0.38) 35%,
+    rgba(0, 0, 0, 0.12) 60%,
+    transparent 75%
+    );
+
+filter: blur(3px);
+
+animation: candleShadow 2.3s ease-in-out infinite;
+}
+
+
+/* ============================================================
+ANIMACIONES NATURALES DE LA LUZ
+============================================================ */
+
+@keyframes candleLight {
+
+0% {
+    opacity: 0.65;
+    transform: translateX(-50%) scale(0.94);
+}
+
+20% {
+    opacity: 0.85;
+    transform: translateX(-51%) scale(1.02);
+}
+
+43% {
+    opacity: 0.72;
+    transform: translateX(-48%) scale(0.97);
+}
+
+67% {
+    opacity: 0.92;
+    transform: translateX(-52%) scale(1.06);
+}
+
+82% {
+    opacity: 0.70;
+    transform: translateX(-49%) scale(0.96);
+}
+
+100% {
+    opacity: 0.82;
+    transform: translateX(-50%) scale(1);
+}
+}
+
+
+@keyframes candleDrift {
+
+0% {
+    margin-left: -5px;
+}
+
+50% {
+    margin-left: 8px;
+}
+
+100% {
+    margin-left: -3px;
+}
+}
+
+
+/* Barrido irregular de luz izquierda */
+@keyframes candleSweepLeft {
+
+0% {
+    opacity: 0.55;
+    transform: translateX(-18px) scale(0.96);
+}
+
+30% {
+    opacity: 0.85;
+    transform: translateX(8px) scale(1.02);
+}
+
+55% {
+    opacity: 0.62;
+    transform: translateX(-4px) scale(0.98);
+}
+
+80% {
+    opacity: 0.92;
+    transform: translateX(18px) scale(1.04);
+}
+
+100% {
+    opacity: 0.68;
+    transform: translateX(2px) scale(1);
+}
+}
+
+
+/* Barrido irregular de luz derecha */
+@keyframes candleSweepRight {
+
+0% {
+    opacity: 0.68;
+    transform: translateX(18px) scale(1);
+}
+
+25% {
+    opacity: 0.90;
+    transform: translateX(-8px) scale(1.04);
+}
+
+50% {
+    opacity: 0.58;
+    transform: translateX(5px) scale(0.97);
+}
+
+75% {
+    opacity: 0.88;
+    transform: translateX(-15px) scale(1.03);
+}
+
+100% {
+    opacity: 0.65;
+    transform: translateX(-2px) scale(0.98);
+}
+}
+
+
+/* Sombra que cambia con el movimiento de la llama */
+@keyframes candleShadow {
+
+0%,
+100% {
+    opacity: 0.65;
+    transform: translateX(-50%) scaleX(0.90) scaleY(0.85);
+}
+
+25% {
+    opacity: 0.48;
+    transform: translateX(-47%) scaleX(1.08) scaleY(0.95);
+}
+
+50% {
+    opacity: 0.72;
+    transform: translateX(-53%) scaleX(0.82) scaleY(0.80);
+}
+
+75% {
+    opacity: 0.42;
+    transform: translateX(-49%) scaleX(1.16) scaleY(1);
+}
+}
+
+/* Las varillas proyectan sombra simulada sobre el papel */
+.rod { z-index: 6; }
+
+/* ----------------------------------------------------------
+    NUEVAS ANIMACIONES
+    ---------------------------------------------------------- */
+@keyframes flickerFlame {
+    0%, 100% { transform: translateX(-50%) scale(1) rotate(0deg); }
+    25%      { transform: translateX(-52%) scale(1.05, 0.95) rotate(-2deg); }
+    50%      { transform: translateX(-48%) scale(0.95, 1.08) rotate(2deg); }
+    70%      { transform: translateX(-51%) scale(1.02, 0.98) rotate(-1deg); }
+}
+
+@keyframes glowPulse {
+    0%, 100% { opacity: 0.85; transform: translateX(-50%) scale(1); }
+    50%      { opacity: 1;    transform: translateX(-50%) scale(1.12); }
+}
+
+@keyframes waxGlow {
+    0%, 100% { opacity: 0.7; }
+    50%      { opacity: 1; }
+}
+
+@keyframes shadowPulse {
+    0%, 100% { opacity: 0.8; transform: translateX(-50%) scaleX(1); }
+    50%      { opacity: 0.5; transform: translateX(-50%) scaleX(1.15); }
+}
+
+/* Barridos de luz que recorren el pergamino, como si el aire
+    moviera las llamas */
+@keyframes lightSweepL {
+    0%, 100% { opacity: 0.7; transform: translateX(0); }
+    50%      { opacity: 1;   transform: translateX(30px); }
+}
+
+@keyframes lightSweepR {
+    0%, 100% { opacity: 0.7; transform: translateX(0); }
+    50%      { opacity: 1;   transform: translateX(-30px); }
+}
+
+/* ----------------------------------------------------------
+    RESPONSIVE DE LAS VELAS
+    ---------------------------------------------------------- */
+@media (max-width: 900px) {
+    .candle { display: none; } /* en móvil estorbarían */
+    .scene::before, .scene::after { display: none; }
+}
+
+
+
+
+/* ----------------------------------------------------------
+    VARIABLES DE ESTADO
+    ---------------------------------------------------------- */
+:root {
+  --scroll-duration: 1.4s;
+  --parchment: #e8d5a3;
+}
+
+/* ----------------------------------------------------------
+    ESCENARIO: luz de vela + polvo flotante
+    ---------------------------------------------------------- */
+.scene { position: relative; z-index: 1; }
+
+.candlelight {
+position: fixed;
+inset: 0;
+pointer-events: none;
+
+background:
+    radial-gradient(
+    ellipse at 8% 55%,
+    rgba(255, 170, 55, 0.13),
+    transparent 38%
+    ),
+    radial-gradient(
+    ellipse at 92% 55%,
+    rgba(255, 170, 55, 0.13),
+    transparent 38%
+    );
+
+animation: ambientCandleFlicker 2.4s ease-in-out infinite;
+z-index: 10;
+
+mix-blend-mode: screen;
+}
+
+
+@keyframes ambientCandleFlicker {
+
+0% {
+    opacity: 0.65;
+}
+
+18% {
+    opacity: 0.85;
+}
+
+37% {
+    opacity: 0.72;
+}
+
+51% {
+    opacity: 0.95;
+}
+
+68% {
+    opacity: 0.70;
+}
+
+84% {
+    opacity: 0.88;
+}
+
+100% {
+    opacity: 0.68;
+}
+}
+
+/* Transición suave entre pergaminos */
+.scroll-wrapper.changing .parchment {
+filter: brightness(0.72);
+}
+
+.scroll-wrapper.changing .poem-container {
+opacity: 0;
+transform: translateY(10px);
+transition: opacity 0.45s ease, transform 0.45s ease;
+}
+
+.scroll-wrapper:hover .parchment {
+filter: brightness(1.05);
+}
+
+/* ----------------------------------------------------------
+    CONTENEDOR DEL PERGAMINO
+    ---------------------------------------------------------- */
+.scroll-wrapper {
+position: relative;
+width: min(720px, calc(100vw - 140px));
+display: flex;
+justify-content: center;
+cursor: pointer;
+
+transform: rotate(-0.5deg);
+
+filter:
+    drop-shadow(0 20px 25px rgba(0, 0, 0, 0.65))
+    drop-shadow(0 35px 70px rgba(0, 0, 0, 0.55));
+}
+
+.scroll-wrapper:focus-visible {
+    outline: 3px solid #f5d58d;
+    outline-offset: 8px;
+}
+
+/* ----------------------------------------------------------
+    VARILLAS SUPERIOR E INFERIOR (madera)
+    ---------------------------------------------------------- */
+.rod {
+    position: absolute;
+    left: -5%;
+    width: 110%;
+    height: 34px;
+    border-radius: 17px;
+    background:
+    /* vetas de madera */
+    repeating-linear-gradient(90deg,
+        rgba(0,0,0,0.10) 0px, transparent 3px,
+        rgba(255,255,255,0.05) 6px, transparent 10px),
+    linear-gradient(180deg, #7a5228 0%, #5a3a1e 40%,
+                    #3d2712 60%, #6b4522 100%);
+    box-shadow:
+    0 6px 14px rgba(0,0,0,0.6),
+    inset 0 2px 3px rgba(255,210,140,0.3),
+    inset 0 -3px 5px rgba(0,0,0,0.5);
+    z-index: 5;
+}
+
+.rod::before, .rod::after {
+    /* pomos de las varillas */
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 30%,
+                #d4a55a, #8a6134 55%, #4a2e14);
+    box-shadow: 0 3px 6px rgba(0,0,0,0.6),
+                inset 0 -2px 4px rgba(0,0,0,0.4);
+}
+
+.rod::before { left: -13px; transform: translateY(-50%); }
+.rod::after  { right: -13px; transform: translateY(-50%); }
+
+.rod-top    { top: 0; }
+.rod-bottom { bottom: 0; }
+
+/* ----------------------------------------------------------
+    CUERDAS LATERALES
+    ---------------------------------------------------------- */
+.rope {
+    position: absolute;
+    top: 10px;
+    width: 6px;
+    height: 110px;
+    background: repeating-linear-gradient(180deg,
+                #b8955c 0px, #96733d 4px, #b8955c 8px);
+    border-radius: 3px;
+    box-shadow: 1px 0 2px rgba(0,0,0,0.5);
+    z-index: 4;
+    transform-origin: top center;
+    animation: sway 4s ease-in-out infinite;
+}
+
+.rope.left  { left: 6%;  animation-delay: 0s; }
+.rope.right { right: 6%; animation-delay: -2s; }
+
+@keyframes sway {
+    0%, 100% { transform: rotate(3deg); }
+    50%      { transform: rotate(-3deg); }
+}
+
+.rope::after {
+    /* borla / nudo */
+    content: '';
+    position: absolute;
+    bottom: -14px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 14px;
+    height: 20px;
+    border-radius: 0 0 7px 7px;
+    background: linear-gradient(180deg, #96733d, #6e5228);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.5);
+}
+
+/* ----------------------------------------------------------
+    EL PERGAMINO (papel)
+    ---------------------------------------------------------- */
+.parchment {
+    position: relative;
+    width: 100%;
+    /* Altura animada: cerrado es un rollito, abierto muestra todo */
+    height: 70px;
+    overflow: hidden;
+    transition: height var(--scroll-duration) cubic-bezier(0.65, 0, 0.35, 1),
+                filter 0.3s ease;
+    background:
+    /* manchas y envejecido */
+    radial-gradient(ellipse 300px 200px at 15% 20%, rgba(150,110,50,0.25), transparent 70%),
+    radial-gradient(ellipse 250px 300px at 85% 75%, rgba(140,100,45,0.30), transparent 70%),
+    radial-gradient(ellipse 150px 100px at 50% 90%, rgba(120,85,35,0.20), transparent 70%),
+    /* fibra de papel */
+    repeating-linear-gradient(2deg,
+        rgba(0,0,0,0.015) 0px, transparent 2px),
+    /* base */
+    linear-gradient(180deg, var(--parchment) 0%, #dfc890 40%,
+                    var(--parchment) 100%);
+    box-shadow:
+    inset 0 0 60px rgba(120, 85, 35, 0.45),
+    inset 0 0 12px rgba(90, 60, 20, 0.35);
+    z-index: 3;
+}
+
+/* Estado abierto */
+.scroll-wrapper.open .parchment { height: min(800px, calc(100vh - 48px)); }
+
+/* ----------------------------------------------------------
+    BORDES DESGASTADOS DEL PERGAMINO
+    ---------------------------------------------------------- */
+.parchment::before,
+.parchment::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 26px;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.parchment::before {
+    left: 0;
+    background: linear-gradient(90deg,
+    rgba(120, 85, 35, 0.55), rgba(120, 85, 35, 0.15) 50%, transparent);
+}
+
+.parchment::after {
+    right: 0;
+    background: linear-gradient(-90deg,
+    rgba(120, 85, 35, 0.55), rgba(120, 85, 35, 0.15) 50%, transparent);
+}
+
+/* ----------------------------------------------------------
+    CONTENIDO: EL POEMA
+    ---------------------------------------------------------- */
+.poem-container {
+    position: relative;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 70px 70px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition:
+    opacity 0.8s ease calc(var(--scroll-duration) * 0.55),
+    transform 0.8s ease calc(var(--scroll-duration) * 0.55);
+}
+
+.scroll-wrapper.open .poem-container {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Ornamento decorativo del poema */
+.poem-ornament {
+    font-size: 2.2rem;
+    color: #7a5228;
+    letter-spacing: 8px;
+    margin-bottom: 24px;
+    text-shadow: 1px 1px 0 rgba(255, 240, 200, 0.6);
+}
+
+.poem-title {
+    font-size: 1.9rem;
+    font-variant: small-caps;
+    letter-spacing: 4px;
+    color: #4a2e14;
+    margin-bottom: 8px;
+    text-align: center;
+}
+
+.poem-divider {
+    width: 180px;
+    height: 2px;
+    margin: 18px auto 30px;
+    background: linear-gradient(90deg, transparent, #7a5228, transparent);
+    position: relative;
+}
+
+.poem-divider::after {
+    content: '❦';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--parchment);
+    padding: 0 12px;
+    color: #7a5228;
+    font-size: 1.1rem;
+}
+
+.poem {
+    font-size: 1.25rem;
+    line-height: 2.2;
+    text-align: center;
+    color: #3d2b12;
+    font-style: italic;
+    max-width: 480px;
+    max-height: 440px;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    padding: 0 14px 72px;
+    scrollbar-color: #8a6134 rgba(122, 82, 40, 0.14);
+    scrollbar-width: thin;
+}
+
+@supports (height: 100dvh) {
+    .scroll-wrapper.open .parchment { height: min(800px, calc(100dvh - 48px)); }
+    .poem { max-height: max(160px, min(440px, calc(100dvh - 360px))); }
+}
+
+.poem::-webkit-scrollbar {
+    width: 8px;
+}
+
+.poem::-webkit-scrollbar-track {
+    border-radius: 4px;
+    background: rgba(122, 82, 40, 0.14);
+}
+
+.poem::-webkit-scrollbar-thumb {
+    border: 1px solid rgba(255, 240, 200, 0.45);
+    border-radius: 4px;
+    background: #8a6134;
+}
+
+.poem:focus-visible {
+    outline: 2px solid #8a6134;
+    outline-offset: 3px;
+}
+
+.poem p { margin-bottom: 6px; }
+
+/* Sello de cera decorativo */
+.wax-seal {
+    position: absolute;
+    bottom: 50px;
+    right: 55px;
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 30%,
+                #a03028, #7a1f1a 55%, #4d0f0c);
+    box-shadow:
+    0 4px 10px rgba(0,0,0,0.5),
+    inset 0 3px 6px rgba(255,150,120,0.35),
+    inset 0 -4px 8px rgba(0,0,0,0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: rotate(-12deg);
+}
+
+.wax-seal::before {
+    content: '✦';
+    color: rgba(255, 200, 180, 0.7);
+    font-size: 1.6rem;
+}
+
+.wax-seal::after {
+    /* forma irregular de cera */
+    content: '';
+    position: absolute;
+    inset: -4px;
+    border-radius: 48% 52% 55% 45% / 52% 46% 54% 48%;
+    border: 2px solid rgba(122, 31, 26, 0.6);
+    pointer-events: none;
+}
+
+.scroll-navigation {
+    position: relative;
+    z-index: 12;
+    flex: 0 0 auto;
+    width: clamp(38px, 5vw, 56px);
+    height: 58px;
+    border: 2px solid #8a6134;
+    border-radius: 10px;
+    background: linear-gradient(180deg, #6b4522, #4a2e14);
+    color: #e8d5a3;
+    font: bold 1rem Georgia, 'Times New Roman', serif;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6),
+    inset 0 1px 0 rgba(255, 220, 150, 0.25);
+    transition: transform 0.2s ease, filter 0.2s ease, box-shadow 0.2s ease;
+}
+
+.scroll-navigation:hover {
+    transform: scale(1.08);
+    filter: brightness(1.2);
+    box-shadow: 0 0 20px rgba(255, 190, 80, 0.3);
+}
+
+.scroll-navigation:focus-visible {
+    outline: 3px solid #f5d58d;
+    outline-offset: 4px;
+}
+
+.scroll-count {
+    position: absolute;
+    bottom: 22px;
+    left: 50%;
+    color: #6e5228;
+    font-size: 0.9rem;
+    letter-spacing: 2px;
+    transform: translateX(-50%);
+}
+
+/* ----------------------------------------------------------
+    RESPONSIVE
+    ---------------------------------------------------------- */
+@media (max-width: 640px) {
+    .scroll-wrapper.open .parchment { height: min(640px, calc(100vh - 48px)); }
+    .poem-container { padding: 60px 36px; }
+    .poem { max-height: max(120px, min(360px, calc(100vh - 320px))); font-size: 1.05rem; line-height: 2; }
+    .wax-seal { bottom: 30px; right: 30px; width: 50px; height: 50px; }
+    .scroll-navigation { height: 48px; font-size: 0.8rem; }
+    .scroll-count { bottom: 14px; }
+}
+
+@media (max-width: 640px) {
+    @supports (height: 100dvh) {
+        .scroll-wrapper.open .parchment { height: min(640px, calc(100dvh - 48px)); }
+        .poem { max-height: max(120px, min(360px, calc(100dvh - 320px))); }
+    }
+}
+
+    /* ============================================================
+VIÑETA OSCURA — CONCENTRA LA ATENCIÓN EN EL PERGAMINO
+============================================================ */
+
+body::after {
+content: '';
+position: fixed;
+inset: 0;
+pointer-events: none;
+
+z-index: 7;
+
+background:
+    radial-gradient(
+    ellipse at center,
+    transparent 25%,
+    rgba(0, 0, 0, 0.15) 45%,
+    rgba(0, 0, 0, 0.45) 68%,
+    rgba(0, 0, 0, 0.78) 100%
+    );
+
+box-shadow:
+    inset 0 0 180px rgba(0, 0, 0, 0.85),
+    inset 0 0 350px rgba(0, 0, 0, 0.45);
+
+mix-blend-mode: multiply;
+}
+
+
+
+.scene {
+position: relative;
+z-index: 11;
+display: flex;
+align-items: center;
+justify-content: center;
+gap: clamp(8px, 2vw, 24px);
+width: 100%;
+filter: none;
+}

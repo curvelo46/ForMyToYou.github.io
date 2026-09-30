@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>For You ❤️</title>
+
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/game.css">
+</head>
+
+
+<body>
+
+    <!-- ==================================================
+         PANTALLA DE INICIO
+    ================================================== -->
+
+    <section id="inicio">
+
+        <div class="inicio-contenido">
+
+            <h1>Quédate un momento conmigo✨</h1>
+
+            <p>
+                 Quiero enseñarte algo que hice para ti...
+            </p>
+
+          <div class="botones-inicio">
+                <button id="si" type="button">
+                    Ir 💖
+                </button>
+
+                <button id="no" type="button">
+                    No
+                </button>
+          </div>
+
+            <div id="respuestaNo"></div>
+
+        </div>
+
+    </section>
+
+    <div id="explosion" aria-hidden="true"></div>
+
+
+    <!-- ==================================================
+         UNIVERSO
+    ================================================== -->
+
+    <main id="universo">
+
+
+    <!-- ==================================================
+         LUZ CENTRAL
+    ================================================== -->
+
+    <div id="brillo"></div>
+
+
+    <!-- ==================================================
+         ESTRELLAS
+    ================================================== -->
+
+    <div id="estrellas"></div>
+
+
+    <!-- ==================================================
+         ESTRELLAS FUGACES
+    ================================================== -->
+
+    <div id="estrellasFugaces"></div>
+
+
+    <!-- ==================================================
+         FRASES
+    ================================================== -->
+
+    <div id="frases"></div>
+
+
+    <!-- ==================================================
+         FOTOS
+    ================================================== -->
+
+    <div id="fotos"></div>
+
+    <!-- La luz del final aparece sobre los recuerdos, no los reemplaza. -->
+    <div id="goldenHour" aria-hidden="true">
+        <div class="golden-sol"></div>
+        <div class="golden-horizonte"></div>
+    </div>
+
+    <div id="mensajeFinal" aria-live="polite">
+        <div class="mensaje-final-contenido">
+            <span>Time is nothing when...</span>
+            <strong>I'm here with you.</strong>
+        </div>
+    </div>
+
+    <div id="mensajeCierre" aria-live="polite">ya es todo we</div>
+
+    <section id="juegoOverlay" aria-label="Juego de supervivencia espacial">
+        <div id="supervivenciaMensaje" aria-live="assertive">!!SOBREVIVE!!</div>
+        <div class="juego-integrado">
+            <div id="info">
+                <span class="label">PUNTUACIÓN</span>
+                <span id="puntuacion">0</span>
+            </div>
+            <main class="zona-juego">
+                <canvas id="juego" width="800" height="600" data-autostart="false"
+                    aria-label="Juego espacial. Muévete con WASD o las flechas y dispara con Z."></canvas>
+                <div id="mensaje">
+                    <div class="game-over">
+                        <div class="explosion" aria-hidden="true">💥</div>
+                        <h2>GAME OVER</h2>
+                        <p>Tu puntuación: <strong id="puntuacionFinal">0</strong></p>
+                        <button type="button" onclick="reiniciar()">🚀 VOLVER A JUGAR</button>
+                    </div>
+                </div>
+            </main>
+            <div class="juego-controles">Mover: WASD / flechas <span>·</span> Disparar: Z</div>
+            <button id="habilitarMusica" type="button" hidden>Activar música</button>
+        </div>
+    </section>
+
+
+    <!-- ==================================================
+         RECUERDO
+    ================================================== -->
+
+    <div id="recuerdo">
+
+    <div class="recuerdo-titulo">
+        Un recuerdo nuestro ❤️
+    </div>
+
+    <img
+        src="assets/whatsapp.png.png"
+        alt="Nuestro recuerdo"
+    >
+
+</div>
+
+</main>
+
+<section id="pergaminoOverlay" class="pergamino-overlay" aria-label="Pergamino desbloqueado" hidden>
+   
+    <iframe src="pergamino.html" title="Pergamino desbloqueado" loading="lazy"></iframe>
+</section>
+
+
+    <!-- ==================================================
+         JAVASCRIPT
+    ================================================== -->
+
+    <script type="module" src="touhou chino/js/juego.js"></script>
+    <script type="module" src="js/main.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,266 @@
+#juegoOverlay {
+    position: absolute;
+    inset: 0;
+    z-index: 20;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 1.5s ease, visibility 0s linear 1.5s;
+}
+
+#universo.fase-supervivencia #juegoOverlay {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transition: opacity 1.5s ease;
+}
+
+#universo.pergamino-secreto #juegoOverlay {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transition: none;
+}
+
+.juego-integrado {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    width: min(850px, 96vw);
+    padding: 18px;
+    color: #fff;
+    font-family: "Courier New", monospace;
+    text-shadow: 0 0 8px #00ffff;
+}
+
+#juegoOverlay #info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+    color: white;
+}
+
+#juegoOverlay #info .label {
+    color: #b9c9ed;
+    font-size: 10px;
+    letter-spacing: 2px;
+}
+
+#juegoOverlay #puntuacion {
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.zona-juego {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.pergamino-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 1001;
+    display: flex;
+    justify-content: center;
+    background: rgba(0, 0, 0, .82);
+    opacity: 1;
+}
+
+.pergamino-overlay[hidden] {
+    display: none;
+}
+
+.pergamino-overlay.portal-transicion {
+    background: #000;
+    opacity: 0;
+    transition: opacity 1.8s ease;
+}
+
+.pergamino-overlay.portal-transicion.portal-oscurece {
+    opacity: 1;
+}
+
+.pergamino-overlay iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+.pergamino-overlay.portal-transicion iframe {
+    opacity: 0;
+    transition: opacity 2.4s ease;
+}
+
+.pergamino-overlay.portal-transicion.portal-ilumina iframe {
+    opacity: 1;
+}
+
+.cerrar-pergamino {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    z-index: 1;
+}
+
+.pergamino-overlay.portal-transicion .cerrar-pergamino {
+    opacity: 0;
+    transition: opacity 2.4s ease;
+}
+
+.pergamino-overlay.portal-transicion.portal-ilumina .cerrar-pergamino {
+    opacity: 1;
+}
+
+#juegoOverlay #juego {
+    display: block;
+    width: min(800px, 92vw);
+    height: auto;
+    max-height: 68vh;
+    aspect-ratio: 4 / 3;
+    border: 1px solid rgba(125, 220, 255, .65);
+    border-radius: 8px;
+    background: rgba(1, 2, 7, .12);
+    box-shadow: 0 0 22px rgba(0, 150, 255, .35);
+}
+
+#juegoOverlay #mensaje {
+    position: absolute;
+    inset: 0;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    background: rgba(0, 0, 15, .78);
+    backdrop-filter: blur(3px);
+}
+
+#juegoOverlay .game-over {
+    padding: 25px 38px;
+    border: 1px solid #31529c;
+    border-radius: 15px;
+    background: rgba(8, 14, 35, .96);
+    text-align: center;
+    box-shadow: 0 0 25px rgba(0, 150, 255, .3);
+}
+
+#juegoOverlay .explosion {
+    margin-bottom: 5px;
+    font-size: 40px;
+    animation: supervivencia-pulso .8s infinite alternate;
+}
+
+#juegoOverlay .game-over h2 {
+    margin: 5px 0 15px;
+    color: #ff5364;
+    font-size: 28px;
+    letter-spacing: 4px;
+}
+
+#juegoOverlay .game-over p {
+    color: #b9c9ed;
+}
+
+#juegoOverlay .game-over strong {
+    color: white;
+    font-size: 20px;
+}
+
+#juegoOverlay button {
+    margin-top: 12px;
+    padding: 10px 18px;
+    border: 1px solid #2c91c9;
+    border-radius: 7px;
+    background: linear-gradient(180deg, #1674a8, #0b3d61);
+    color: white;
+    font: bold 12px "Courier New", monospace;
+    cursor: pointer;
+}
+
+.juego-controles {
+    color: rgba(224, 235, 255, .85);
+    font: 12px "Courier New", monospace;
+    text-align: center;
+    text-shadow: 0 0 8px #00bfff;
+}
+
+.juego-controles span {
+    padding: 0 8px;
+    color: #7ddcff;
+}
+
+#habilitarMusica:not([hidden]) {
+    display: block;
+}
+
+#supervivenciaMensaje {
+    position: absolute;
+    top: 9vh;
+    left: 50%;
+    z-index: 2;
+    color: #fff;
+    font: 900 clamp(32px, 7vw, 76px) "Courier New", monospace;
+    letter-spacing: .08em;
+    text-align: center;
+    text-shadow: 0 0 10px #ff315b, 0 0 28px #ff164e, 0 0 55px #ff0055;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateX(-50%);
+}
+
+#supervivenciaMensaje.visible {
+    opacity: 1;
+    visibility: visible;
+    animation: supervivencia-temblor .12s linear infinite;
+}
+
+@keyframes supervivencia-temblor {
+    0%, 100% { transform: translate(-50%, 0) rotate(0); }
+    25% { transform: translate(calc(-50% - 3px), 2px) rotate(-1deg); }
+    50% { transform: translate(calc(-50% + 3px), -2px) rotate(1deg); }
+    75% { transform: translate(calc(-50% - 2px), -1px) rotate(-.5deg); }
+}
+
+@keyframes supervivencia-pulso {
+    from { transform: scale(.9); opacity: .7; }
+    to { transform: scale(1.1); opacity: 1; }
+}
+
+@media (max-width: 600px) {
+    #juegoOverlay {
+        align-items: flex-end;
+    }
+
+    .juego-integrado {
+        gap: 7px;
+        padding: 8px;
+    }
+
+    #juegoOverlay #juego {
+        width: min(92vw, 800px);
+        max-height: 58vh;
+    }
+
+    #supervivenciaMensaje {
+        top: 13vh;
+    }
+
+    .juego-controles {
+        font-size: 10px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    #supervivenciaMensaje.visible {
+        animation: none;
+    }
+}

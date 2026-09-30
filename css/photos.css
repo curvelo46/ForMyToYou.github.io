@@ -1,0 +1,60 @@
+.foto {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: var(--size);
+    height: var(--size);
+    object-fit: cover;
+    padding: 0;
+    background: transparent;
+    border-radius: 12px;
+    box-shadow: none;
+    opacity: 0;
+    z-index: 7;
+    animation: viajarFoto var(--photoDuration, 7.6s) linear infinite;
+    animation-delay: var(--photoDelay);
+}
+
+.foto.luna {
+    border-radius: 50%;
+    padding: 0;
+    background: transparent;
+    box-shadow: none;
+}
+
+@keyframes viajarFoto {
+    0% {
+        opacity: 0;
+        transform: translate3d(-50%, -50%, 0) translate(var(--startX), var(--startY)) scale(.08) rotate(var(--rot));
+    }
+
+    12% {
+        opacity: .35;
+    }
+
+    27%,
+    65% {
+        opacity: 1;
+    }
+
+    84% {
+        opacity: .92;
+    }
+
+    100% {
+        opacity: 0;
+        transform: translate3d(-50%, -50%, 0) translate(var(--endX), var(--endY)) scale(1.45) rotate(calc(var(--rot) * -1));
+    }
+}
+
+#universo.galaxia-final #fotos {
+    opacity: .12;
+    transition: opacity 6s ease;
+}
+
+@media (max-width: 600px) {
+    .foto {
+        width: calc(var(--size) * .82);
+        height: calc(var(--size) * .82);
+    }
+}

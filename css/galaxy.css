@@ -1,0 +1,119 @@
+#galaxiaFinal {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 3;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 5s ease;
+    mix-blend-mode: screen;
+}
+
+#universo.galaxia-final #galaxiaFinal {
+    opacity: 1;
+}
+
+#galaxiaCanvas {
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 4;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 5s ease;
+}
+
+#universo.galaxy-visible #galaxiaCanvas {
+    opacity: 1;
+    filter: saturate(1.2) brightness(1.08);
+    transition: opacity 12s ease;
+}
+
+#universo.finale-negro #galaxiaCanvas {
+    opacity: 0;
+    transition: opacity 5s ease;
+}
+
+#universo.galaxia-final #galaxiaCanvas {
+    opacity: 1;
+}
+
+#universo.fase-supervivencia > :not(#galaxiaCanvas):not(.galaxy-title):not(.galaxy-info):not(#juegoOverlay):not(#mensajeCierre) {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+#universo.fase-supervivencia #galaxiaCanvas {
+    opacity: 1;
+    filter: saturate(1.2) brightness(1.08);
+    transition: opacity 1.5s ease;
+}
+
+#universo.fase-supervivencia .galaxy-title,
+#universo.fase-supervivencia .galaxy-info {
+    opacity: 1;
+}
+
+#universo.fase-supervivencia #estrellas *,
+#universo.fase-supervivencia #estrellasFugaces *,
+#universo.fase-supervivencia #frases *,
+#universo.fase-supervivencia #fotos *,
+#universo.finale-negro #estrellas *,
+#universo.finale-negro #estrellasFugaces *,
+#universo.finale-negro #frases *,
+#universo.finale-negro #fotos * {
+    animation-play-state: paused;
+}
+
+.galaxy-title,
+.galaxy-info {
+    position: fixed;
+    z-index: 6;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 12s ease;
+}
+
+.galaxy-title {
+    top: 25px;
+    left: 30px;
+    color: rgba(255,255,255,.8);
+    font-family: Arial, sans-serif;
+    font-size: 13px;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    text-shadow: 0 0 10px #8b8cff, 0 0 25px #4c4cff;
+}
+
+.galaxy-info {
+    bottom: 25px;
+    left: 30px;
+    color: rgba(255,255,255,.55);
+    font-family: Arial, sans-serif;
+    font-size: 11px;
+}
+
+#universo.galaxy-visible .galaxy-title,
+#universo.galaxy-visible .galaxy-info,
+#universo.galaxia-final .galaxy-title,
+#universo.galaxia-final .galaxy-info {
+    opacity: 1;
+}
+
+@media (max-width: 600px) {
+    .galaxy-title {
+        top: 18px;
+        left: 18px;
+        font-size: 10px;
+        letter-spacing: 3px;
+    }
+
+    .galaxy-info {
+        bottom: 18px;
+        left: 18px;
+    }
+
+}

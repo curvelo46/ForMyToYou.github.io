@@ -1,0 +1,6 @@
+1. Abre esta carpeta en Visual Studio Code.
+2. Instala/usa la extensión Live Server.
+3. Abre index.html con "Open with Live Server".
+4. En la página, pulsa "Sí ❤️" una sola vez.
+
+IMPORTANTE: no abras index.html directamente con file://; usa Live Server.

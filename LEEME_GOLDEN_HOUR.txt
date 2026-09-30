@@ -1,0 +1,17 @@
+VERSIÓN GOLDEN HOUR
+
+La pregunta inicial y los botones se conservaron como estaban.
+
+Cambios realizados:
+- Paleta cálida: rosa, ámbar y dorado.
+- Fotos con aspecto de recuerdos/polaroids.
+- Final con horizonte y sol dorado, en lugar de galaxia y planetas.
+- Mensaje final editable en index.html: "Si existe un momento perfecto... quiero que siempre sea contigo."
+
+
+manteniendo exactamente el mismo nombre. No hace falta tocar el JavaScript: los
+momentos se ajustan automáticamente a la duración del nuevo MP3.
+
+PARA VERLO
+
+Abre la carpeta con VS Code y usa Live Server. Luego pulsa tu botón inicial.

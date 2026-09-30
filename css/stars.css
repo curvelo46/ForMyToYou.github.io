@@ -1,0 +1,33 @@
+#estrellas {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.estrella {
+    position: absolute;
+    border-radius: 50%;
+    background: #ffe4ad;
+    opacity: .65;
+    box-shadow: 0 0 7px rgba(255, 208, 132, .62);
+    animation: parpadear var(--blink) ease-in-out infinite alternate;
+}
+
+@keyframes parpadear {
+    from {
+        opacity: .15;
+        transform: scale(.55);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1.3);
+    }
+}
+
+#universo.galaxia-final #estrellas {
+    opacity: .65;
+    transition: opacity 5s ease;
+}

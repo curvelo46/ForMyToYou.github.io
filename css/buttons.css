@@ -1,0 +1,119 @@
+#inicio {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background:
+        radial-gradient(circle at 50% 35%, rgba(255, 191, 119, .24), transparent 34%),
+        linear-gradient(160deg, #312142 0%, #6b3e4f 54%, #dd8c61 100%);
+    transition: opacity .7s ease;
+}
+
+.inicio-contenido {
+    text-align: center;
+    animation: aparecerPregunta 1.2s ease;
+}
+
+.pregunta-inicio {
+    text-align: center;
+    animation: aparecerPregunta 1.2s ease forwards;
+}
+
+.pregunta {
+    margin-bottom: 28px;
+    color: white;
+    font-family: "Caveat", cursive;
+    font-size: clamp(30px, 5vw, 48px);
+    text-shadow: 0 0 12px rgba(255,255,255,.25), 0 0 30px rgba(170,130,255,.25);
+}
+
+.botones-inicio {
+    display: flex;
+    justify-content: center;
+    gap: 18px;
+}
+
+.botones-inicio button {
+    border: 1px solid rgba(255,255,255,.3);
+    border-radius: 999px;
+    padding: 12px 28px;
+    color: white;
+    font-family: "Caveat", cursive;
+    font-size: 23px;
+    cursor: pointer;
+    background: rgba(255,255,255,.08);
+    box-shadow: 0 0 25px rgba(190,160,255,.15);
+    transition: transform .25s ease, background .25s ease, box-shadow .25s ease;
+}
+
+.botones-inicio button:hover {
+    background: rgba(255,255,255,.15);
+    box-shadow: 0 0 30px rgba(200,170,255,.3);
+}
+
+#si {
+    background: linear-gradient(135deg, rgba(255, 189, 102, .42), rgba(241, 115, 127, .30));
+    margin-right: 159px;
+}
+
+#inicio h1 {
+    color: #f6a6d8;
+    text-shadow: 0 0 12px rgba(246, 166, 216, .25);
+}
+
+#inicio p {
+    color: #c9b8e8;
+    text-shadow: 0 0 8px rgba(201, 184, 232, .18);
+}
+
+#no {
+    position: relative;
+    transition: left .35s ease, top .35s ease;
+}
+
+#respuestaNo {
+    min-height: 30px;
+    margin-top: 25px;
+    color: #ffd6f3;
+    font-family: "Caveat", cursive;
+    font-size: 22px;
+    text-shadow: 0 0 10px rgba(255,150,220,.35);
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity .4s ease, transform .4s ease;
+}
+
+#respuestaNo.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+@keyframes aparecerPregunta {
+    from {
+        opacity: 0;
+        transform: translateY(15px) scale(.96);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+#explosion {
+    position: fixed;
+    width: 72px;
+    height: 101px;
+    pointer-events: none;
+    z-index: 9999;
+    display: none;
+    background-image: url("../assets/explosion.png");
+    background-repeat: no-repeat;
+    background-size: 433px 318px;
+}
+
+#explosion.activa {
+    display: block;
+}

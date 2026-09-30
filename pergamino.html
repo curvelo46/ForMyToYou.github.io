@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pergamino Interactivo</title>
+<link rel="stylesheet" href="css/pergamino.css">
+<script type="module" src="js/pergamino.js"></script>
+
+</head>
+<body>
+
+  <div class="candlelight"></div>
+    <!-- VELAS LATERALES -->
+  <div class="candle candle-left">
+    <div class="candle-glow"></div>
+    <div class="flame">
+      <div class="flame-inner"></div>
+    </div>
+    <div class="wick"></div>
+    <div class="candle-body">
+      <div class="drip drip-1"></div>
+      <div class="drip drip-2"></div>
+      <div class="drip drip-3"></div>
+    </div>
+    <div class="candle-shadow"></div>
+  </div>
+
+  <div class="candle candle-right">
+    <div class="candle-glow"></div>
+    <div class="flame">
+      <div class="flame-inner"></div>
+    </div>
+    <div class="wick"></div>
+    <div class="candle-body">
+      <div class="drip drip-1"></div>
+      <div class="drip drip-2"></div>
+      <div class="drip drip-3"></div>
+    </div>
+    <div class="candle-shadow"></div>
+  </div>
+
+
+  <div class="scene">
+    <button class="scroll-navigation" id="previousScroll" type="button"
+      aria-label="Mostrar el pergamino anterior">&lt;&lt;</button>
+
+    <div class="scroll-wrapper" id="scrollWrapper" role="button" tabindex="0"
+      aria-expanded="false" aria-controls="scrollContent" aria-label="Abrir o cerrar el pergamino">
+
+      <div class="rope left"></div>
+      <div class="rope right"></div>
+
+      <div class="rod rod-top"></div>
+
+      <div class="parchment">
+        <div class="poem-container">
+          <div class="poem-ornament">❦ ❦ ❦</div>
+          <h2 class="poem-title" id="scrollTitle"></h2>
+          <div class="poem-divider"></div>
+
+          <div class="poem" id="scrollContent" tabindex="0"
+            aria-label="Contenido del pergamino; desplázate para continuar leyendo"></div>
+
+          <div class="wax-seal"></div>
+          <p class="scroll-count" id="scrollCount" aria-live="polite"></p>
+        </div>
+      </div>
+
+      <div class="rod rod-bottom"></div>
+
+    </div>
+
+    <button class="scroll-navigation" id="nextScroll" type="button"
+      aria-label="Mostrar el siguiente pergamino">&gt;&gt;</button>
+  </div>
+
+</body>
+</html>
