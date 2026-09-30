@@ -252,7 +252,7 @@ export class StartButtons {
         this.intentosNo++;
 
         if (this.intentosNo === 3) {
-            this.respuestaNo.textContent = "Sigue jodiendo y reviento el boton >:V";
+            this.respuestaNo.textContent = "Sigue jodiendo y reviento el botón >:V";
             this.respuestaNo.classList.remove("visible");
             void this.respuestaNo.offsetWidth;
             this.respuestaNo.classList.add("visible");
