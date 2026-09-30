@@ -736,7 +736,7 @@ function comprobarDisparos() {
                 disparos.splice(i, 1);
                 meteoritos.splice(j, 1);
 
-                puntuacion += 90;
+                puntuacion += 40;
 
                 actualizarPuntuacion();
 
