@@ -148,8 +148,8 @@ const jefe = {
     alto: 100,
 
     // Primera forma
-    vida: 1000,
-    vidaMaxima: 1000,
+    vida: 1500,
+    vidaMaxima: 1500,
 
     activo: true,
 
@@ -212,7 +212,7 @@ const portal = {
 // DAÑO DE LA NAVE
 // ==========================================
 
-let dañoDisparo = 8;
+let dañoDisparo = 6;
 
 let laseresJugador = [];
 
