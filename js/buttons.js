@@ -21,7 +21,7 @@ const DURACION_DESVANECIMIENTO_GALAXIA = 5000;
 const ESPERA_MENSAJE_CIERRE = 6500;
 const ESPERA_SUPERVIVENCIA = 30000;
 const DURACION_AVISO_SUPERVIVENCIA = 30000;
-const FRASE_SECRETA = "love";
+const FRASE_SECRETA = "codigo secreto ultra secreto";
 
 export class StartButtons {
     constructor({ si, no, respuestaNo, inicio, universo, frases }) {
